@@ -2,5 +2,6 @@
 .bsp/
 .metals/
 .vscode/
+.idea/
 target/
 metals.sbt
