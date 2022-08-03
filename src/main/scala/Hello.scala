@@ -14,7 +14,7 @@ object Hello {
         def handle(httpExchange: HttpExchange): Unit = {
           println(s"GET ${httpExchange.getRequestURI().getPath()} received.")
 
-          val response = "Hello, World!"
+          val response = "Hello, Backend 102!"
           httpExchange.sendResponseHeaders(200, response.length)
           val out = httpExchange.getResponseBody()
 

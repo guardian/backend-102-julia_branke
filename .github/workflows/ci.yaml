@@ -22,9 +22,50 @@ jobs:
         with:
           java-version: "11"
           distribution: "corretto"
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14
+      - working-directory: ./cdk
+        run: |
+          npm ci
+          npm run lint
+          npm test
+          npm run synth
       - name: test and check formatting
         run: |
           sbt -v test scalafmtCheckAll
       - name: build uberjar
         run: |
           sbt -v assembly
+
+      - uses: guardian/actions-riff-raff@v1
+        with:
+          app: backend-102-julia
+          config: |
+            stacks:
+              - deploy
+            regions:
+              - eu-west-1
+            allowedStages:
+              - CODE
+            deployments:
+              cloudformation:
+                type: cloud-formation
+                app: backend-102-julia
+                sources:
+                  - cdk/cdk.out/Backend102Julia-CODE.template.json
+                parameters:
+                  amiParameter: AMIBackend102julia
+                  amiTags:
+                    Recipe: backend-101
+                    AmigoStage: PROD
+                  templatePath: Backend102Julia-CODE.template.json
+              backend-101-julia:
+                type: autoscaling
+                sources:
+                  - target/scala-2.13/hello-world.jar
+                  - app.service
+                parameters:
+                  bucket: deploy-tools-dist
+                dependencies:
+                  - cloudformation
