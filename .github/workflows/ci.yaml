@@ -57,10 +57,10 @@ jobs:
                 parameters:
                   amiParameter: AMIBackend102julia
                   amiTags:
-                    Recipe: backend-101
+                    Recipe: backend-102
                     AmigoStage: PROD
                   templatePath: Backend102Julia-CODE.template.json
-              backend-101-julia:
+              backend-102-julia:
                 type: autoscaling
                 sources:
                   - target/scala-2.13/hello-world.jar
