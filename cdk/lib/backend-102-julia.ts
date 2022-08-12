@@ -1,11 +1,11 @@
+import { GuEc2App } from '@guardian/cdk';
+import { AccessScope } from '@guardian/cdk/lib/constants';
 import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
 import { GuStack } from '@guardian/cdk/lib/constructs/core';
+import { GuCname } from '@guardian/cdk/lib/constructs/dns';
 import type { App } from 'aws-cdk-lib';
-import {GuEc2App} from "@guardian/cdk";
-import {AccessScope} from "@guardian/cdk/lib/constants";
-import {InstanceClass, InstanceSize, InstanceType} from "aws-cdk-lib/aws-ec2";
-import {GuCname} from "@guardian/cdk/lib/constructs/dns";
-import {Duration} from "aws-cdk-lib";
+import { Duration } from 'aws-cdk-lib';
+import { InstanceClass, InstanceSize, InstanceType } from 'aws-cdk-lib/aws-ec2';
 
 export class Backend102Julia extends GuStack {
 	constructor(scope: App, id: string, props: GuStackProps) {
@@ -42,6 +42,5 @@ systemctl start ${name}
 			ttl: Duration.minutes(1),
 			resourceRecord: app.loadBalancer.loadBalancerDnsName,
 		});
-
 	}
 }
