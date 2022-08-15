@@ -59,7 +59,7 @@ jobs:
                   amiParameter: AMIBackend102julia
                   amiTags:
                     BuiltBy: amigo
-                    Recipe: backend-102
+                    Recipe: backend-101
                     AmigoStage: PROD
                   templatePath: Backend102Julia-CODE.template.json
               backend-102-julia:
