@@ -1,5 +1,5 @@
 [Unit]
-Description=Backend 101 app
+Description=Backend 102 app
 
 [Service]
 ExecStart=/usr/bin/java -jar /hello-world.jar
