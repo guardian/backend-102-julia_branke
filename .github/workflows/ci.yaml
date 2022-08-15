@@ -25,18 +25,19 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 14
-      - working-directory: ./cdk
-        run: |
-          npm ci
-          npm run lint
-          npm test
-          npm run synth
       - name: test and check formatting
         run: |
           sbt -v test scalafmtCheckAll
       - name: build uberjar
         run: |
           sbt -v assembly
+      - working-directory: ./cdk
+        run: |
+          npm ci
+          npm run lint
+          npm test
+          npm run synth
+
 
       - uses: guardian/actions-riff-raff@v1
         with:
@@ -58,7 +59,7 @@ jobs:
                   amiParameter: AMIBackend102julia
                   amiTags:
                     BuiltBy: amigo
-                    Recipe: backend-101
+                    Recipe: backend-102
                     AmigoStage: PROD
                   templatePath: Backend102Julia-CODE.template.json
               backend-102-julia:
